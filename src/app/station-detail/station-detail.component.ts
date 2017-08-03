@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-
+import { Observable } from 'rxjs/Observable';
 
 
 import { ApiService } from '../api.service';
-import { PositionService } from './position.service';
 import { Station } from '../station';
 import { PositionSet } from '../position-set';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-station-detail',
@@ -14,13 +14,17 @@ import { PositionSet } from '../position-set';
   styleUrls: ['./station-detail.component.css']
 })
 export class StationDetailComponent implements OnInit {
-  station:Station;
-  stationId;
+  stations:Station[];
+  stationName: string;
+  stationId: string;
   positionSets: PositionSet[];
+  positionSet: PositionSet;
+  dol: number;
   constructor(
     private apiService : ApiService,
     private activatedRoute: ActivatedRoute,
-    private positionService : PositionService
+    private router: Router,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
@@ -28,9 +32,25 @@ export class StationDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params:Params)=>{
     this.stationId=params['id']; console.log(this.stationId)});
 
-    this.positionService.getPosition(this.stationId)
-    .subscribe(pos => this.positionSets=pos.position_set)
+    this.apiService.getPositions(this.stationId)
+    .subscribe(pos => {this.positionSets=pos.position_set;
+    this.stationName=pos.name},er=> console.log(this.stationName))
+
+    this.appComponent.items=[];
+    this.appComponent.items.push({label: "Seznam postaj", url: this.appComponent.goHome()})
+    this.appComponent.items.push({label:"Postaja:"+this.stationId,
+         url:this.router.navigate(['/station',this.stationId])})
+    
+
+
+
+  }
+  onPositionClick(position: PositionSet): void{
+    this.positionSet=position
+    this.router.navigate(['/station',this.stationId,this.positionSet.id])
   }
 
+
+  
 
 }

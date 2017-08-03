@@ -1,3 +1,9 @@
 <h1 (click)="goHome()"> Hidrološke postaje </h1>
+<p-breadcrumb [model]="items" (click)="goHome()"></p-breadcrumb>
+
 <hr />
 <router-outlet></router-outlet>
+
+<br>
+<br>
+<button (click)="goBack()">Nazaj</button>

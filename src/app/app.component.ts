@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,13 +6,25 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'app works!';
-  constructor(private router : Router){}
+  items: any[];
+  constructor(private router : Router){
+    
+  }
 
   //click on title 'hidrološke postaje'
    goHome(): void{
     this.router.navigate(['']);
+  }
+  goBack():void{
+    window.history.back()
+  }
+  ngOnInit(){
+    this.items=[];
+  
+   
+
   }
  
 }

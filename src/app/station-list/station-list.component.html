@@ -1,5 +1,3 @@
-<h3> Seznam hidroloških postaj: </h3>
-
 
 <!-- <table class="table table-striped table-hover ">
   <thead>
@@ -23,10 +21,9 @@
   </tbody>
 </table> -->  
 
- <h3 class="first">Seznam postaj</h3>
+ <h3 class="first">Seznam hidroloških postaj</h3>
 <p-dataTable [value]="stations" selectionMode="single" 
 [(selection)]="selectedStation" (onRowSelect)="onStation(selectedStation)">
     <p-column field="name" header="Ime"></p-column>
     <p-column field="id" header="ID"></p-column>
 </p-dataTable>
-  <p *ngIf="selectedStation"> {{selectedStation.name}} </p> 

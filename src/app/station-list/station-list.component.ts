@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AppComponent } from '../app.component';
 
-import 'rxjs/add/operator/toPromise';
-import {Header} from 'primeng/primeng';
-import {Footer} from 'primeng/primeng';
-import {TreeTableModule,TreeNode,SharedModule} from 'primeng/primeng';
-
-import { StationService } from '../station.service';
 import { ApiService } from '../api.service';
 import { Station } from '../station';
 
@@ -20,23 +15,25 @@ import { Station } from '../station';
 export class StationListComponent implements OnInit {
   stations;
   stationClick;
+  items: any[]
 
   constructor(
-    private stationService: StationService,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
-    //this.stationService.getStations().then(stations => this.stations = stations )
     this.apiService.getStationOb()
     .subscribe(stat=> this.stations=stat)
- /*    this.apiService.getStations()
-    .then(stations => this.stations=stations); */
+
+    this.appComponent.items=[];
+    this.appComponent.items.push({label: "Seznam postaj", url: this.appComponent.goHome()})
+    
   }
   onStation(station: Station): void {
-    this.stationClick=station;
-    this.router.navigate(['/station',station.id])
+    this.stationClick=station
+    this.router.navigate(['/station',this.stationClick.id])
   }
 
 }
