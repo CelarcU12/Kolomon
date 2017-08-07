@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./koledar.component.css']
 })
 export class KoledarComponent implements OnInit {
+  date_from;
+  date_to;
 
   constructor() { }
 

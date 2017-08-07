@@ -13,9 +13,9 @@ import { Station } from '../station';
   styleUrls: ['./station-list.component.css']
 })
 export class StationListComponent implements OnInit {
-  stations;
-  stationClick;
-  items: any[]
+  stations: Station[]
+  stationClick: Station;
+  items: any[];
 
   constructor(
     private apiService: ApiService,
@@ -24,7 +24,7 @@ export class StationListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiService.getStationOb()
+    this.apiService.getStations()
     .subscribe(stat=> this.stations=stat)
 
     this.appComponent.items=[];

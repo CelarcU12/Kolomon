@@ -1,19 +1,7 @@
 
 
-<!-- <p-dataGrid [value]="positionSets" [rows]="20">
-    <p-header>
-        Seznam position-set
-    </p-header>
-    <template let-position pTemplate="item"  >
-        <div style="padding:3px" class="ui-g-12 ui-md-3">
-             <p-panel [header]="position.id" [style]="{'text-align':'center'}">
-                <div class="position-detail">{{position.id}} {{position.flower}}, {{position.position}} </div>
-                <hr class="ui-widget-content" style="border-top:0">
-              </p-panel>
-        </div>
-    </template>
-</p-dataGrid> -->
 
+<h3> Postaja: {{stationName}}, id: {{stationId}} </h3>
  <h3 class="first">Seznam pozicij</h3>
 <p-dataTable [value]="positionSets" selectionMode="single" 
 [(selection)]="selectedPosition" (onRowSelect)="onPositionClick(selectedPosition)">

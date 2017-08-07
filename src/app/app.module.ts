@@ -9,26 +9,30 @@ import { RoutingModule } from './routing/routing.module';
 import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
 import {MenuModule, MenuItem} from 'primeng/primeng';            //api
 import {DataTableModule, DataGridModule} from 'primeng/primeng';     //accordion and accordion tab
-import {ChartModule} from 'primeng/primeng';
 import {CalendarModule} from 'primeng/primeng'; //koledar za izbiro prikaza
 import {SliderModule} from 'primeng/primeng';
 import {BreadcrumbModule} from 'primeng/primeng';
 import {TabViewModule} from 'primeng/primeng';
+import {ChartModule} from 'primeng/primeng';
 
+//components
 import { AppComponent } from './app.component';
 import { StationListComponent } from './station-list/station-list.component';
 import { StationDetailComponent } from './station-detail/station-detail.component';
 import { GraphSetComponent } from './graph-set/graph-set.component';
-
-//services
-import { StationService } from './station.service';
-import { ApiService } from './api.service';
-import { DataService } from './data.service';
 import { PlotGraphComponent } from './plot-graph/plot-graph.component';
 import { KoledarComponent } from './koledar/koledar.component';
 import { DrsnikComponent } from './drsnik/drsnik.component';
 import { GumbiDatumComponent } from './gumbi-datum/gumbi-datum.component';
 import { GraphTableComponent } from './graph-table/graph-table.component';
+
+//services
+import { ApiService } from './api.service';
+import { DataService } from './data.service';
+
+//chart
+//import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
+
 
 
 @NgModule({
@@ -41,7 +45,8 @@ import { GraphTableComponent } from './graph-table/graph-table.component';
     KoledarComponent,
     DrsnikComponent,
     GumbiDatumComponent,
-    GraphTableComponent
+    GraphTableComponent,
+    //GoogleChart
   ],
   imports: [
     BrowserModule,
@@ -51,16 +56,16 @@ import { GraphTableComponent } from './graph-table/graph-table.component';
     AccordionModule,
     DataTableModule,
     DataGridModule,
-    ChartModule,
     CalendarModule,
     SliderModule,
     BreadcrumbModule,
     MenuModule,
-    TabViewModule
-    
+    TabViewModule,
+    ChartModule
   ],
-  providers: [StationService, ApiService, DataService],
+  providers: [ApiService, DataService],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  
 })
 export class AppModule { }

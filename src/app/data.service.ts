@@ -36,9 +36,4 @@ export class DataService{
       .map(graphData => graphData.json())
   }
 
-  getGraphValue(name: string, param: number, date1: string, date2: string): Observable<number[]>{
-      return this.http.get(this.url+'?station='+name+'&param='+(+param)+'&date_from='+date1+'&date_to='+date2)
-      .map(graphData => graphData.json().value)
-  }
-
 }

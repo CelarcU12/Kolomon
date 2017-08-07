@@ -15,18 +15,15 @@ const urlPostaje='/api/v1/views';
 export class ApiService {
   idPostaje: number;
   base_url: string;
-  positions;
+  positions: PositionSet;
 
   constructor(
     private http: Http,
     private route: ActivatedRoute //za pridobivanje id-jev iz url-ja
   ) {this.base_url=urlPostaje; }
 
- /*  getStations(): Promise<Station[]>{
-    return this.http.get(`${this.base_url}`).toPromise()
-    .then(response => response.json());
-}*/
-  getStationOb(): Observable<Station[]>{
+
+  getStations(): Observable<Station[]>{
     return this.http.get(this.base_url)
     .map(post => post.json())
   }
@@ -50,6 +47,9 @@ export class ApiService {
     return this.getPositions(id1)
     .map(positions => this.positions = positions.position_set
       .find( pos => pos.id === (+id2)))
+  }
+  getGraphSets(id1: string, id2:string): Observable<GraphSet[]>{
+    return this.getPosition(id1,id2).map(graphSets=>graphSets.graph_set)
   }
 
 

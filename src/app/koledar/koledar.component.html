@@ -1,3 +1,7 @@
-<p>
-  koledar works!
-</p>
+ Koledar za vnašanje časa
+  <div class="ui-g-12 ui-md-4">
+        <h3>Začetni čas</h3>
+        <p-calendar [(ngModel)]="date_from" [showTime]="true"></p-calendar> {{date_from}}
+        <h3>Končni čas</h3>
+        <p-calendar [(ngModel)]="date_to" [showTime]="true"></p-calendar> {{date_to}}
+    </div> 

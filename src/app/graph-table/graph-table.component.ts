@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { GraphSet } from '../graph-set';
+import { GraphSetComponent } from '../graph-set/graph-set.component';
 import { DataService } from '../data.service';
 import { Graph } from '../graph-set/graph';
 
@@ -16,10 +17,12 @@ export class GraphTableComponent implements OnInit {
   dateFrom= moment().format('YYYY-MM-DD')+'%20'+moment().subtract(12,'hours').format('HH:mm')+':00'; 
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private graphSetComponent: GraphSetComponent
   ) { }
 
   ngOnInit() {
+    
 
 
   }

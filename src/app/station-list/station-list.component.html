@@ -1,27 +1,6 @@
 
-<!-- <table class="table table-striped table-hover ">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Ime postaje</th>
-      <th>ID</th>
-      <th>Število (position_set)</th>
-    </tr>
-  </thead>
- 
-  <tbody *ngFor ="let station of statOb; let i = index " 
-  [routerLink]="['/station',station.id]" 
-  (click) = "onStation(station)">
-    <tr>
-      <td>{{i+1}}</td>
-      <td>{{station.name}}</td>
-      <td>{{station.id}}</td>
-      <td>{{station.position_set.length}}</td>
-    </tr>
-  </tbody>
-</table> -->  
 
- <h3 class="first">Seznam hidroloških postaj</h3>
+<h3 class="first">Seznam hidroloških postaj</h3>
 <p-dataTable [value]="stations" selectionMode="single" 
 [(selection)]="selectedStation" (onRowSelect)="onStation(selectedStation)">
     <p-column field="name" header="Ime"></p-column>

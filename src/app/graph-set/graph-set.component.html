@@ -2,7 +2,7 @@
 
 <app-graph-table></app-graph-table>
 
-<p-dataTable [value]="graphs" selectionMode="single" 
+<p-dataTable [value]="graphSets" selectionMode="single" 
 [(selection)]="selectedGraph" (onRowSelect)="onGraphClick(selectedGraph)">
     <p-column field="plot_code" header="Oznaka Postaje"></p-column>
     <p-column field="station" header="Številka postaje"></p-column>
@@ -22,36 +22,16 @@
         <app-drsnik></app-drsnik>
     </p-tabPanel>
 </p-tabView>
-<!-- Koledar za vnašanje časa
-  <div class="ui-g-12 ui-md-4">
-        <h3>Začetni čas</h3>
-        <p-calendar [(ngModel)]="date_from" [showTime]="true"></p-calendar> {{date_from}}
-        <h3>Končni čas</h3>
-        <p-calendar [(ngModel)]="date_to" [showTime]="true"></p-calendar> {{date_to}}
-    </div> -->
 
-<h5> Od {{dateFrom}} do {{dateTo}}</h5>
-<h5> ali {{numberOfHours[0]}}h --> {{numberOfHours[1]}}h</h5>
-  <p-slider [(ngModel)]="numberOfHours" 
-  [style]="{'width':'600px','height':'15px'}" 
-  [step]=1 [animate]="true"
-  [range]="true" [min]="0" [max] ="48"
-  (onChange)="changeDate($event)"></p-slider>
-<a *ngIf="selectedGraph"></a>
-  
-<!-- <li *ngFor=" let value of graphData">
-{{value.value}} ---------------- {{value.date}}
-</li> 
- -->
+
+
 <p *ngIf="selectedGraph">
 <p-dataTable [value]="graphData" >
     <p-column field="value" header="Vrednost"></p-column>
     <p-column field="date" header="Čas"></p-column>
     <p-column field="status" header="Status"></p-column>
 </p-dataTable>  
-</p>
-<li *ngFor=" let value of graphValues">
-  {{value.value}}
-</li>
 
+{{graphValues}}
+</p>
     

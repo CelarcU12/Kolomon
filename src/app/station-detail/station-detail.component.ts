@@ -14,12 +14,9 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./station-detail.component.css']
 })
 export class StationDetailComponent implements OnInit {
-  stations:Station[];
   stationName: string;
   stationId: string;
   positionSets: PositionSet[];
-  positionSet: PositionSet;
-  dol: number;
   constructor(
     private apiService : ApiService,
     private activatedRoute: ActivatedRoute,
@@ -30,11 +27,12 @@ export class StationDetailComponent implements OnInit {
   ngOnInit() {
     //id from url
     this.activatedRoute.params.subscribe((params:Params)=>{
-    this.stationId=params['id']; console.log(this.stationId)});
+    this.stationId=params['id']; console.log('Kliknjena postaja: '+this.stationId)});
 
-    this.apiService.getPositions(this.stationId)
-    .subscribe(pos => {this.positionSets=pos.position_set;
-    this.stationName=pos.name},er=> console.log(this.stationName))
+    
+    this.getStationName();
+    this.getPositions();  
+
 
     this.appComponent.items=[];
     this.appComponent.items.push({label: "Seznam postaj", url: this.appComponent.goHome()})
@@ -46,8 +44,15 @@ export class StationDetailComponent implements OnInit {
 
   }
   onPositionClick(position: PositionSet): void{
-    this.positionSet=position
-    this.router.navigate(['/station',this.stationId,this.positionSet.id])
+    this.router.navigate(['/station',this.stationId,position.id])
+  }
+  getPositions(){
+    this.apiService.getPositions(this.stationId)
+    .subscribe(position=> this.positionSets=position.position_set)
+  }
+  getStationName(){
+    this.apiService.getPositions(this.stationId)
+    .subscribe(station => this.stationName=station.name, err=> console.log(this.stationName))
   }
 
 
