@@ -27,7 +27,7 @@ export class PlotGraphComponent implements OnInit {
     this.stationId=params['id1'];
     this.positionId=params['id2'];})
 
-    this.graphSetComponent.getGraphs
+
     
     
   }

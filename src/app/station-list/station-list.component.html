@@ -2,7 +2,10 @@
 
 <h3 class="first">Seznam hidroloških postaj</h3>
 <p-dataTable [value]="stations" selectionMode="single" 
-[(selection)]="selectedStation" (onRowSelect)="onStation(selectedStation)">
+[(selection)]="selectedStation" (click)="clickOnStation(selectedStation)">
     <p-column field="name" header="Ime"></p-column>
     <p-column field="id" header="ID"></p-column>
 </p-dataTable>
+
+
+<!-- (onRowSelect)="onStation(selectedStation)"  -->

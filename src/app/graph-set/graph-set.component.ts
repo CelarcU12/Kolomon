@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 
 import * as moment from 'moment';
 
+import { StationListComponent } from '../station-list/station-list.component'; 
+
 import { KoledarComponent } from '../koledar/koledar.component';
 import { DrsnikComponent } from '../drsnik/drsnik.component';
 import { GumbiDatumComponent } from '../gumbi-datum/gumbi-datum.component';
@@ -25,13 +27,10 @@ import { Graph } from './graph';
 @Component({
   selector: 'app-graph-set',
   templateUrl: './graph-set.component.html',
-  styleUrls: ['./graph-set.component.css'],
-  //providers: [GraphTableComponent],
-  
+  styleUrls: ['./graph-set.component.css']
+
 })
 export class GraphSetComponent implements OnInit {
-  stationId:string;
-  positionId: string;
   graphSets: GraphSet[];
   graphData: Graph[];
   selectedGraph: GraphSet;
@@ -40,11 +39,6 @@ export class GraphSetComponent implements OnInit {
   
   dateTo= moment().format('YYYY-MM-DD')+'%20'+moment().subtract(0,'hours').format('HH:mm')+':00'; 
   dateFrom= moment().startOf('day').format('YYYY-MM-DD')+'%20'+moment().startOf('day').format('HH:mm')+':00'; 
-
- plotData:any;
- public type= 'line';
- public data=[{label:"podatki", data: this.graphValues}];
- public labels=[this.graphTime];
 
   constructor(
       private apiService: ApiService,
@@ -56,32 +50,14 @@ export class GraphSetComponent implements OnInit {
   ) {   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params:Params)=>{
-    this.stationId=params['id1'];
-    this.positionId=params['id2'];})
-    this.getGraphs()
-
-    
-   this.appComponent.items=[];
-    this.appComponent.items.push({label: "Seznam postaj", url: this.appComponent.goHome()})
-    this.appComponent.items.push({label:"Postaja:"+this.stationId,
-         url:this.router.navigate(['/station',this.stationId])})
-    this.appComponent.items.push({label:"Positions:"+this.positionId,
-         url:this.router.navigate(['/station',this.stationId,this.positionId])})
-  
-    
-    
+    this.activatedRoute.data
+    .map((data)=> data['stations'])
+    .subscribe((graphSets)=> this.graphSets=graphSets);
   }
 
-//pridobi position_set in iz nje izlušči samo seznam grafov 
-//glede na id postaje in id pozicije
-    getGraphs(): void{
-      //iz position_set dobi graph_set
-      this.apiService.getGraphSets(this.stationId,this.positionId).subscribe(graph=>this.graphSets=graph)
-    }
     onGraphClick(graph: GraphSet):void{
       this.selectedGraph=graph;
-      this.appComponent.items[3]={label: graph.plot_code.toString()}
+      this.appComponent.items[4]={label: graph.plot_code.toString()}
 
       //this.graphTableComponent.getGraphData(graph)
       this.dataService.getGraphData(graph.plot_code, graph.partab, this.dateFrom, this.dateTo)
@@ -89,23 +65,6 @@ export class GraphSetComponent implements OnInit {
                             this.graphTime=meritve.map(a=>a.date)})
       //število izbranih ur
 
-
-    
-      
-    
     }
-
-    changeDate($event){
- 
-      this.onGraphClick(this.selectedGraph)
-      
-      
-    }
-
-
-    ///plot the graph
-
-
-    
 
 }

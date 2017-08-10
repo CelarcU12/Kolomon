@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { ApiService } from './api.service'; 
+
 import { Station } from './station';
 import { GraphSet } from './graph-set';
 import { PositionSet } from './position-set';
@@ -27,7 +29,8 @@ export class DataService{
 
     constructor(
     private http: Http,
-    private route: ActivatedRoute //za pridobivanje id-jev iz url-ja
+    private route: ActivatedRoute, //za pridobivanje id-jev iz url-ja
+    private api: ApiService
   ) {this.url=urlPostaje; }
 
 //metoda, ki dobi vrednosti posamezne postaje, glede na ime postaje parameter in datum
@@ -36,4 +39,16 @@ export class DataService{
       .map(graphData => graphData.json())
   }
 
+  getViews(): Observable<Station[]>{
+    return this.api.getViews()
+  }
+  getView(id:string): Observable<Station>{
+    return this.api.getView(id)
+  }
+  getPosition(id1: string, id2: string ): Observable<PositionSet>{
+    return this.api.getPositions(id1, id2)
+  }
+  getGraphSets(id1: string, id2: string ): Observable<GraphSet[]>{
+    return this.api.getGraphSets(id1,id2);
+  }
 }

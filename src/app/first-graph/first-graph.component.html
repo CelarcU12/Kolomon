@@ -1,0 +1,6 @@
+
+
+<li *ngFor="let onePosition of position" class="grid" 
+(click)="clickOnPosition(onePosition)">
+<app-position-detail [position] ="onePosition" ></app-position-detail>
+</li>

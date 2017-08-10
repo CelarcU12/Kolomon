@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnChanges, SimpleChange  } from '@angular/core';
+import { Router, NavigationEnd,UrlTree } from '@angular/router';
+
+import { Station } from './station';
 
 
 @Component({
@@ -8,9 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  
   items: any[];
+  sprememba: string
+ change: SimpleChange;
 
-  constructor(private router : Router){  
+
+  constructor(private router : Router){ 
+        router.events.subscribe( change=> 
+        this.onNavigationChange());
   }
 
   //click on title 'hidrološke postaje'
@@ -20,9 +28,17 @@ export class AppComponent implements OnInit{
   goBack():void{
     window.history.back()
   }
-  ngOnInit(){
-    this.items=[];
+
+onNavigationChange(){
+  this.items=[];
+  let url= this.router.url.split('/');
+  let basePath: string="";
+  for (let item of url ){
+    if(item== ''){item='Hidrološke postaje'} else {basePath = basePath +"/" +item;}
+    this.items.push({label: item, url:basePath})
   }
+}
+ngOnInit(){}
   
  
 }

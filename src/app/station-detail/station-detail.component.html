@@ -4,7 +4,14 @@
 <h3> Postaja: {{stationName}}, id: {{stationId}} </h3>
  <h3 class="first">Seznam pozicij</h3>
 <p-dataTable [value]="positionSets" selectionMode="single" 
-[(selection)]="selectedPosition" (onRowSelect)="onPositionClick(selectedPosition)">
+[(selection)]="selectedPosition" (click)="clickOnPosition(selectedPosition)">
     <p-column field="position" header="Ime"></p-column>
     <p-column field="id" header="ID"></p-column>
 </p-dataTable>
+
+
+
+
+<app-first-graph [position] = "positionSets"></app-first-graph>
+
+

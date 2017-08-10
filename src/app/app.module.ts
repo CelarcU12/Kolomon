@@ -29,6 +29,8 @@ import { GraphTableComponent } from './graph-table/graph-table.component';
 //services
 import { ApiService } from './api.service';
 import { DataService } from './data.service';
+import { FirstGraphComponent } from './first-graph/first-graph.component';
+import { PositionDetailComponent } from './position-detail/position-detail.component';
 
 //chart
 //import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
@@ -46,6 +48,8 @@ import { DataService } from './data.service';
     DrsnikComponent,
     GumbiDatumComponent,
     GraphTableComponent,
+    FirstGraphComponent,
+    PositionDetailComponent
     //GoogleChart
   ],
   imports: [
